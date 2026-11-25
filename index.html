@@ -4,65 +4,67 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ผู้ช่วยนักบัญชี v2.1</title>
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="icon" type="image/png" href="icon.png">
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:-apple-system,'Sarabun',sans-serif;background:#f4f6fb;color:#1f2937;padding-bottom:30px}
-  header{background:#4f46e5;color:#fff;padding:14px 18px}
+  body{font-family:-apple-system,'Sarabun',sans-serif;background:#fffbeb;color:#44403c;padding-bottom:30px}
+  header{background:#fbbf24;color:#78350f;padding:14px 18px}
   header h1{font-size:18px}
   header .sub{font-size:12px;opacity:.85;margin-top:2px}
-  nav{display:flex;background:#fff;border-bottom:1px solid #e5e7eb;overflow-x:auto}
-  nav button{flex:1;min-width:54px;padding:12px 3px;border:none;background:none;font-size:11px;cursor:pointer;color:#6b7280;border-bottom:2px solid transparent;white-space:nowrap}
-  nav button.active{color:#4f46e5;border-bottom-color:#4f46e5;font-weight:600}
+  nav{display:flex;background:#fff;border-bottom:1px solid #fde68a;overflow-x:auto}
+  nav button{flex:1;min-width:54px;padding:12px 3px;border:none;background:none;font-size:11px;cursor:pointer;color:#a16207;border-bottom:2px solid transparent;white-space:nowrap}
+  nav button.active{color:#f59e0b;border-bottom-color:#f59e0b;font-weight:600}
   main{padding:16px;max-width:720px;margin:0 auto}
   .tab{display:none}.tab.active{display:block}
-  .card{background:#fff;border-radius:12px;padding:14px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
-  .card h3{font-size:14px;color:#4f46e5;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
-  .row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;font-size:14px;border-bottom:1px dashed #eee;gap:8px}
+  .card{background:#fff;border-radius:12px;padding:14px;margin-bottom:12px;box-shadow:0 1px 3px rgba(180,83,9,.08)}
+  .card h3{font-size:14px;color:#b45309;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+  .row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;font-size:14px;border-bottom:1px dashed #fef3c7;gap:8px}
   .row:last-child{border-bottom:none}
   .pos{color:#059669}.neg{color:#dc2626}.warn{color:#d97706}
   .big{font-size:22px;font-weight:700}
-  .chat-box{background:#fff;border-radius:12px;height:340px;overflow-y:auto;padding:12px;margin-bottom:10px}
+  .chat-box{background:#fff;border-radius:12px;height:340px;overflow-y:auto;padding:12px;margin-bottom:10px;border:1px solid #fde68a}
   .msg{margin-bottom:8px;padding:8px 12px;border-radius:12px;font-size:14px;max-width:85%;line-height:1.5}
-  .msg.user{background:#4f46e5;color:#fff;margin-left:auto}
-  .msg.bot{background:#eef2ff}
+  .msg.user{background:#f59e0b;color:#fff;margin-left:auto}
+  .msg.bot{background:#fef3c7;color:#44403c}
   .input-row{display:flex;gap:8px}
-  .input-row input{flex:1;padding:12px;border:1px solid #d1d5db;border-radius:10px;font-size:14px}
-  .input-row button{padding:12px 18px;background:#4f46e5;color:#fff;border:none;border-radius:10px;font-size:14px;cursor:pointer}
-  .chip{display:inline-block;background:#eef2ff;color:#4f46e5;border-radius:999px;padding:4px 10px;font-size:12px;margin:2px;cursor:pointer}
-  .btn-sm{padding:6px 12px;font-size:12px;border:none;border-radius:8px;cursor:pointer;background:#4f46e5;color:#fff}
-  .btn-sm.gray{background:#e5e7eb;color:#374151}
+  .input-row input{flex:1;padding:12px;border:1px solid #fde68a;border-radius:10px;font-size:14px;background:#fff}
+  .input-row button{padding:12px 18px;background:#f59e0b;color:#fff;border:none;border-radius:10px;font-size:14px;cursor:pointer}
+  .chip{display:inline-block;background:#fef3c7;color:#b45309;border-radius:999px;padding:4px 10px;font-size:12px;margin:2px;cursor:pointer}
+  .btn-sm{padding:6px 12px;font-size:12px;border:none;border-radius:8px;cursor:pointer;background:#f59e0b;color:#fff}
+  .btn-sm.gray{background:#fde68a;color:#78350f}
   .btn-sm.red{background:#fee2e2;color:#dc2626}
   .btn-sm.green{background:#d1fae5;color:#059669}
-  .progress{height:10px;background:#e5e7eb;border-radius:999px;overflow:hidden;margin:8px 0}
-  .progress > div{height:100%;background:#4f46e5;transition:width .3s}
+  .progress{height:10px;background:#fef3c7;border-radius:999px;overflow:hidden;margin:8px 0}
+  .progress > div{height:100%;background:#f59e0b;transition:width .3s}
   .progress > div.warn{background:#d97706}
   .progress > div.over{background:#dc2626}
   .progress > div.green{background:#059669}
-  .item{background:#f9fafb;border-radius:10px;padding:10px;margin-bottom:8px}
+  .item{background:#fffbeb;border-radius:10px;padding:10px;margin-bottom:8px}
   .badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px}
   .badge.done{background:#d1fae5;color:#059669}
   .badge.due{background:#fef3c7;color:#d97706}
   .badge.over{background:#fee2e2;color:#dc2626}
-  small{color:#6b7280}
+  small{color:#a16207}
   .stat{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
-  .stat-box{background:#eef2ff;border-radius:10px;padding:12px;text-align:center}
-  .stat-box .num{font-size:18px;font-weight:700;color:#4f46e5}
-  .stat-box .lbl{font-size:11px;color:#6b7280;margin-top:2px}
-  .card-item{background:#f9fafb;border-radius:10px;padding:12px;margin-bottom:10px;border-left:4px solid #4f46e5}
+  .stat-box{background:#fef3c7;border-radius:10px;padding:12px;text-align:center}
+  .stat-box .num{font-size:18px;font-weight:700;color:#b45309}
+  .stat-box .lbl{font-size:11px;color:#a16207;margin-top:2px}
+  .card-item{background:#fffbeb;border-radius:10px;padding:12px;margin-bottom:10px;border-left:4px solid #f59e0b}
   .card-item.urgent{border-left-color:#dc2626;background:#fef2f2}
   .card-item.soon{border-left-color:#d97706;background:#fffbeb}
   .card-item.safe{border-left-color:#059669;background:#f0fdf4}
-  .budget-item{background:#f9fafb;border-radius:10px;padding:12px;margin-bottom:10px}
+  .budget-item{background:#fffbeb;border-radius:10px;padding:12px;margin-bottom:10px}
   .budget-item.over{background:#fef2f2;border-left:4px solid #dc2626}
   .budget-item.warn{background:#fffbeb;border-left:4px solid #d97706}
   .budget-item.ok{background:#f0fdf4;border-left:4px solid #059669}
-  .wish-item{background:#f9fafb;border-radius:10px;padding:12px;margin-bottom:10px;border-left:4px solid #8b5cf6}
+  .wish-item{background:#fffbeb;border-radius:10px;padding:12px;margin-bottom:10px;border-left:4px solid #a78bfa}
   .wish-item.can-buy{border-left-color:#059669;background:#f0fdf4}
   .wish-item.cant-buy{border-left-color:#dc2626;background:#fef2f2}
   .wish-item.travel{border-left-color:#0891b2;background:#ecfeff}
-  .wish-item.wishlist{border-left-color:#8b5cf6;background:#f5f3ff}
+  .wish-item.wishlist{border-left-color:#a78bfa;background:#f5f3ff}
   .month-select{display:flex;gap:8px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
-  .month-select select{padding:8px 12px;border:1px solid #d1d5db;border-radius:8px;font-size:14px;background:#fff}
+  .month-select select{padding:8px 12px;border:1px solid #fde68a;border-radius:8px;font-size:14px;background:#fff}
   .chart-container{position:relative;width:100%;max-width:320px;margin:0 auto}
   .legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;justify-content:center}
   .legend-item{display:flex;align-items:center;gap:4px;font-size:12px}
@@ -70,7 +72,7 @@
   .bar-chart{display:flex;gap:6px;align-items:flex-end;height:160px;margin-top:12px;padding:0 4px}
   .bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
   .bar{width:100%;max-width:32px;border-radius:4px 4px 0 0;min-height:2px;transition:height .3s}
-  .bar-label{font-size:10px;color:#6b7280;text-align:center}
+  .bar-label{font-size:10px;color:#a16207;text-align:center}
 </style>
 </head>
 <body>
@@ -425,7 +427,6 @@ function renderDash(){
   document.getElementById("d-bnpl").textContent=fmt(bnplTotal())+" ฿";
 }
 
-/* ===== REPORT ===== */
 function getAvailableMonths(){
   var months={};
   DB.transactions.forEach(function(t){
@@ -433,7 +434,6 @@ function getAvailableMonths(){
     var key=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0");
     months[key]={year:d.getFullYear(),month:d.getMonth()};
   });
-  // always include current
   var now=new Date();
   months[now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0")]={year:now.getFullYear(),month:now.getMonth()};
   var arr=Object.keys(months).sort().reverse();
@@ -458,7 +458,6 @@ function renderReport(){
   var parts=sel.value.split("-");
   var year=parseInt(parts[0]), month=parseInt(parts[1]);
 
-  // transactions in that month
   var tx=DB.transactions.filter(function(x){return inMonthOf(x.date,year,month);});
   var extra=tx.filter(function(x){return x.type==="income";}).reduce(function(a,b){return a+b.amount;},0);
   var salaryNet=DB.profile.salary-DB.profile.ss-DB.profile.pvd;
@@ -488,12 +487,12 @@ function renderReport(){
 function drawPie(catMap){
   var canvas=document.getElementById("pieChart");
   var ctx=canvas.getContext("2d");
-  var colors=["#4f46e5","#059669","#dc2626","#d97706","#8b5cf6","#0891b2","#ec4899","#6b7280","#10b981","#f59e0b"];
+  var colors=["#f59e0b","#059669","#dc2626","#d97706","#8b5cf6","#0891b2","#ec4899","#6b7280","#10b981","#fbbf24"];
   var entries=Object.keys(catMap).map(function(k){return [k,catMap[k]];}).sort(function(a,b){return b[1]-a[1];});
   var total=entries.reduce(function(a,b){return a+b[1];},0);
   ctx.clearRect(0,0,300,300);
   if(total===0){
-    ctx.fillStyle="#9ca3af"; ctx.font="14px sans-serif"; ctx.textAlign="center";
+    ctx.fillStyle="#a16207"; ctx.font="14px sans-serif"; ctx.textAlign="center";
     ctx.fillText("ยังไม่มีข้อมูล",150,150);
     document.getElementById("pieLegend").innerHTML="";
     return;
@@ -514,14 +513,13 @@ function drawPie(catMap){
     start=end;
     legendHtml+="<div class='legend-item'><div class='legend-dot' style='background:"+colors[i%colors.length]+"'></div>"+e[0]+" "+(pct*100).toFixed(0)+"%</div>";
   });
-  // center hole for donut effect
   ctx.beginPath();
   ctx.arc(cx,cy,60,0,Math.PI*2);
   ctx.fillStyle="#fff";
   ctx.fill();
-  ctx.fillStyle="#1f2937"; ctx.font="bold 16px sans-serif"; ctx.textAlign="center";
+  ctx.fillStyle="#44403c"; ctx.font="bold 16px sans-serif"; ctx.textAlign="center";
   ctx.fillText(fmt(total)+" ฿",cx,cy+5);
-  ctx.font="11px sans-serif"; ctx.fillStyle="#6b7280";
+  ctx.font="11px sans-serif"; ctx.fillStyle="#a16207";
   ctx.fillText("รวม",cx,cy-15);
   document.getElementById("pieLegend").innerHTML=legendHtml;
 }
@@ -591,7 +589,7 @@ function renderBudget(){
     html+="<div class='budget-item "+cls+"'>"+
       "<div class='row' style='border:none;padding:0 0 6px 0'><b>"+b.category+"</b><span>"+fmt(used)+" / "+fmt(b.limit)+" ฿</span></div>"+
       "<div class='progress'><div class='"+barCls+"' style='width:"+pct+"%'></div></div>"+
-      "<div class='row' style='border:none;font-size:12px;color:#6b7280;padding-top:4px'>"+
+      "<div class='row' style='border:none;font-size:12px;color:#a16207;padding-top:4px'>"+
         "<span>"+(remain>=0?"เหลือ "+fmt(remain)+" ฿":"เกิน "+fmt(-remain)+" ฿")+"</span>"+
         "<span>"+rawPct.toFixed(0)+"%</span>"+
       "</div>"+
@@ -663,12 +661,12 @@ function renderWish(){
       var pct=w.price>0?Math.min(100,(w.saved/w.price)*100):0;
       var monthsLeft=w.monthlyPlan>0?Math.ceil((w.price-w.saved)/w.monthlyPlan):0;
       extra="<div class='progress'><div class='green' style='width:"+pct+"%'></div></div>"+
-        "<div class='row' style='border:none;font-size:12px;color:#6b7280'>"+
+        "<div class='row' style='border:none;font-size:12px;color:#a16207'>"+
           "<span>เก็บแล้ว "+fmt(w.saved)+" / "+fmt(w.price)+" ฿</span>"+
           "<span>"+(w.monthlyPlan>0?"อีก ~"+monthsLeft+" เดือน":"ยังไม่ตั้งแผน")+"</span>"+
         "</div>";
     } else {
-      extra="<div class='row' style='border:none;font-size:12px;color:#6b7280'>"+
+      extra="<div class='row' style='border:none;font-size:12px;color:#a16207'>"+
         "<span>"+(canBuy?"✅ เงินเหลือพอ":"❌ ยังไม่พอ (ขาด "+fmt(w.price-c.left)+" ฿)")+"</span>"+
         "<span>"+(canBuy?"":"อีก ~"+Math.ceil((w.price-c.left)/1000)+" เดือน")+"</span>"+
       "</div>";
@@ -678,7 +676,7 @@ function renderWish(){
         "<b>"+(w.type==="travel"?"✈️ ":"🎁 ")+w.name+"</b>"+
         "<span>"+fmt(w.price)+" ฿</span>"+
       "</div>"+
-      "<div class='row' style='border:none;font-size:12px;color:#6b7280'>"+
+      "<div class='row' style='border:none;font-size:12px;color:#a16207'>"+
         "<span>ความสำคัญ: "+w.priority+"</span>"+
         "<span>"+(w.type==="travel"?"แผนเที่ยว":"Wishlist")+"</span>"+
       "</div>"+
@@ -754,11 +752,11 @@ function renderCards(){
 
     html+="<div class='card-item "+cls+"'>"+
       "<div class='row' style='border:none;padding:0 0 6px 0'><b>"+c.name+"</b><span style='font-size:18px;font-weight:700;color:#dc2626'>"+fmt(cardTotal)+" ฿</span></div>"+
-      "<div class='row' style='border:none;font-size:12px;color:#6b7280'>"+
+      "<div class='row' style='border:none;font-size:12px;color:#a16207'>"+
         "<span>"+(c.statementDay?"ตัดรอบ "+c.statementDay+" • จ่าย "+c.dueDay:"ไม่มีรอบตัด")+"</span>"+
         "<span>"+daysText+"</span>"+
       "</div>"+
-      "<div class='row' style='border:none;font-size:12px;color:#6b7280;padding-top:4px'>"+
+      "<div class='row' style='border:none;font-size:12px;color:#a16207;padding-top:4px'>"+
         "<span>ใช้จ่ายเดือนนี้: "+fmt(spent)+" ฿</span>"+
         "<span>ค้างเดิม: "+fmt(due)+" ฿</span>"+
       "</div>"+
@@ -804,7 +802,7 @@ function renderInstall(){
     var pct=(it.paid/it.total)*100;
     html+="<div class='item'>"+
       "<div class='row' style='border:none;padding:0 0 6px 0'><b>"+it.name+"</b><span>"+fmt(it.monthly)+" ฿/งวด</span></div>"+
-      "<div class='row' style='border:none;font-size:12px;color:#6b7280'><span>"+(it.cardId||"—")+" • งวดถัดไป "+fmtDate(it.nextDate)+"</span><span>"+it.paid+"/"+it.total+" งวด</span></div>"+
+      "<div class='row' style='border:none;font-size:12px;color:#a16207'><span>"+(it.cardId||"—")+" • งวดถัดไป "+fmtDate(it.nextDate)+"</span><span>"+it.paid+"/"+it.total+" งวด</span></div>"+
       "<div class='progress'><div style='width:"+pct+"%'></div></div>"+
       "<div class='row' style='border:none;padding-top:8px'>"+
         "<span>"+(remain>0?"เหลือ "+remain+" งวด ("+fmt(remain*it.monthly)+" ฿)":"<span class='badge done'>ผ่อนครบแล้ว</span>")+"</span>"+
